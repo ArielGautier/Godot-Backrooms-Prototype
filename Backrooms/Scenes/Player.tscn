@@ -1,0 +1,226 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/Movment.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Cam.gd" type="Script" id=2]
+[ext_resource path="res://3dModels-Scenes/Rover.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sounds/Level0LightAmbience.mp3" type="AudioStream" id=4]
+[ext_resource path="res://TankTrim.tres" type="Material" id=5]
+[ext_resource path="res://Sounds/New video.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Images/cctv.png" type="Texture" id=7]
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 1, 1.13824, 1.04969 )
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.803767, 0.405833, 0.300397 )
+
+[sub_resource type="CylinderMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.733333, 0, 0, 1 )
+
+[sub_resource type="Environment" id=4]
+fog_enabled = true
+fog_color = Color( 0.701961, 0.67451, 0.517647, 1 )
+fog_sun_color = Color( 0.819608, 0.819608, 0.819608, 1 )
+dof_blur_far_enabled = true
+dof_blur_far_distance = 45.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.25
+dof_blur_near_amount = 0.2
+adjustment_enabled = true
+adjustment_saturation = 0.6
+
+[sub_resource type="Environment" id=13]
+fog_enabled = true
+fog_color = Color( 0.701961, 0.67451, 0.517647, 1 )
+fog_sun_color = Color( 0.819608, 0.819608, 0.819608, 1 )
+dof_blur_far_enabled = true
+dof_blur_far_distance = 6.0
+dof_blur_far_quality = 0
+adjustment_enabled = true
+adjustment_brightness = 0.8
+adjustment_contrast = 0.8
+adjustment_saturation = 0.6
+
+[node name="KinematicBody" type="KinematicBody"]
+transform = Transform( 0.416592, 0, 0, 0, 0.6, 0, 0, 0, 0.377757, 0, 4.57276, 0 )
+script = ExtResource( 1 )
+
+[node name="Stand" type="CollisionShape" parent="."]
+transform = Transform( 0.25, 0, 0, 0, 0.802999, 0, 0, 0, 0.25, 0, 0.855078, -0.033251 )
+shape = SubResource( 10 )
+
+[node name="Main" type="CollisionShape" parent="."]
+transform = Transform( -1.74846e-07, -4.03897e-27, 4, 9.05376e-14, 1.91131, 1.01184e-21, -4, 3.43429e-13, -1.74846e-07, 0.0139165, -0.882041, -4.73233e-14 )
+shape = SubResource( 12 )
+
+[node name="MainTank" parent="Main" instance=ExtResource( 3 )]
+transform = Transform( 1, 9.38256e-14, 0, 5.17659e-14, 2.09281, 5.78528e-22, -2.4869e-14, 4.10126e-21, 1, -6.04933e-14, -0.704575, 0 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1.66667, 0, 0, 0, 1.66667, 0, 0, 0, 1.66667, -0.604402, -0.091084, -2.2673 )
+spot_range = 200.0
+spot_attenuation = 3.86374
+spot_angle_attenuation = 1.46409
+
+[node name="FlasLight" type="CSGMesh" parent="."]
+transform = Transform( 0.1, 0, 0, 0, -8.74228e-09, -0.1, 0, 0.2, -4.37113e-09, -0.608133, -0.0827837, -2.05756 )
+mesh = SubResource( 6 )
+material = SubResource( 7 )
+
+[node name="CameraStand" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0670724, 0 )
+
+[node name="FP" type="CSGMesh" parent="CameraStand"]
+transform = Transform( 0.225455, 0, 0, 0, 0.146469, 5.18104e-15, 0, -1.85037e-16, 0.0807813, 0, 1.50929, 3.70074e-14 )
+mesh = SubResource( 8 )
+material = SubResource( 9 )
+
+[node name="Cam" type="Camera" parent="CameraStand/FP"]
+transform = Transform( 10.647, 0, 0, 0, 11.379, -1.15012e-12, 0, 0, 32.77, -0.519179, -0.00428772, -2.13294 )
+cull_mask = 1048573
+environment = SubResource( 4 )
+current = true
+script = ExtResource( 2 )
+
+[node name="Lens" type="CSGCylinder" parent="CameraStand/FP"]
+transform = Transform( 0.297216, 0, 0, 0, -4.36204e-08, 0.469693, 0, -0.997918, -2.0531e-08, -0.373144, 0, -1.49007 )
+
+[node name="Stand2" type="CSGCylinder" parent="CameraStand"]
+transform = Transform( 0.08, 0, 0, 0, 1.4, 0, 0, 0, 0.08, 0, 0.675078, 2.04929e-14 )
+material = ExtResource( 5 )
+
+[node name="CSGSphere" type="CSGSphere" parent="CameraStand"]
+transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.0669656, 0 )
+material = ExtResource( 5 )
+
+[node name="AC" type="CSGMesh" parent="."]
+transform = Transform( 0.389782, 0, 0, 0, 0.158522, 0, 0, 0, 0.303486, 0.54135, -0.494318, -2.45691 )
+mesh = SubResource( 8 )
+material = SubResource( 9 )
+
+[node name="Cam" type="Camera" parent="AC"]
+transform = Transform( 6.15839, 0, 0, 0, 10.5138, 0, 0, 0, 8.72267, -0.519179, -0.00428009, -1.72738 )
+cull_mask = 1048571
+environment = SubResource( 13 )
+fov = 120.0
+
+[node name="Lens" type="CSGCylinder" parent="AC"]
+transform = Transform( 0.297216, 0, 0, 0, -4.36204e-08, 0.469693, 0, -0.997918, -2.0531e-08, -0.373144, 0, -1.49007 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1.66667, 0, 0, 0, 1.66667, 0, 0, 0, 1.66667, 0, 0, 0 )
+stream = ExtResource( 4 )
+unit_db = -20.0
+max_db = 1.0
+autoplay = true
+
+[node name="Tires" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1.66667, 0, 0, 0, 1.66667, 0, 0, 0, 1.66667, -0.117051, -0.170626, -0.172302 )
+stream = ExtResource( 6 )
+unit_db = -20.0
+autoplay = true
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/CenterContainer"]
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+
+[node name="Up" type="Button" parent="Control/CenterContainer/NinePatchRect"]
+margin_left = -6.0
+margin_top = -61.0
+margin_right = 14.0
+margin_bottom = -41.0
+text = "^"
+
+[node name="Left" type="Button" parent="Control/CenterContainer/NinePatchRect"]
+margin_left = -57.0
+margin_top = -9.0
+margin_right = -37.0
+margin_bottom = 11.0
+text = "<"
+
+[node name="Right" type="Button" parent="Control/CenterContainer/NinePatchRect"]
+margin_left = 43.0
+margin_top = -9.0
+margin_right = 63.0
+margin_bottom = 11.0
+text = ">"
+
+[node name="Down" type="Button" parent="Control/CenterContainer/NinePatchRect"]
+margin_left = -5.0
+margin_top = 43.0
+margin_right = 15.0
+margin_bottom = 63.0
+text = "v"
+
+[node name="Button_Lord" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="exit" type="Button" parent="Control/Button_Lord"]
+margin_left = 881.0
+margin_top = 7.0
+margin_right = 901.0
+margin_bottom = 27.0
+toggle_mode = true
+text = "X"
+
+[node name="Cam_forward" type="Button" parent="Control/Button_Lord"]
+margin_left = 837.0
+margin_top = 7.0
+margin_right = 857.0
+margin_bottom = 27.0
+text = "/"
+
+[node name="Cam_mid" type="Button" parent="Control/Button_Lord"]
+margin_left = 814.0
+margin_top = 7.0
+margin_right = 834.0
+margin_bottom = 27.0
+text = "|"
+
+[node name="Cam_back" type="Button" parent="Control/Button_Lord"]
+margin_left = 791.0
+margin_top = 7.0
+margin_right = 811.0
+margin_bottom = 27.0
+text = "\\"
+
+[node name="Switch_cam" type="Button" parent="Control/Button_Lord"]
+margin_left = 736.0
+margin_top = 7.0
+margin_right = 764.0
+margin_bottom = 27.0
+text = "[o]"
+
+[node name="Cam" type="Camera" parent="."]
+transform = Transform( 2.40043, 0, 0, 0, 0.18477, 1.65639, 0, -2.63089, 0.293474, -0.519179, 20.746, 2.65514 )
+cull_mask = 1048571
+current = true
+fov = 120.0

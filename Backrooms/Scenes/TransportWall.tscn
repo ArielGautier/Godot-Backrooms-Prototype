@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="Skin" id=4]
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.545098, 0.603922, 0.317647, 1 )
+ao_enabled = true
+ao_light_affect = 1.0
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[node name="Transport" type="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.5 )
+
+[node name="Col" type="CollisionShape" parent="."]
+transform = Transform( 10, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Col"]
+transform = Transform( 1, 0, 2.22045e-16, 0, 1, 0, 5.68434e-14, 0, 1, 0, 0, 0 )
+layers = 2
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 10 )

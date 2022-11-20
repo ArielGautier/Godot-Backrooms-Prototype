@@ -1,0 +1,305 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Images/Carpet0002_1_350.jpg" type="Texture" id=1]
+[ext_resource path="res://Images/Celing2.jpg" type="Texture" id=2]
+[ext_resource path="res://Images/Wall.png" type="Texture" id=3]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="Skin" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 5, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 5, 0.25, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 4, 1, 4 )
+
+[sub_resource type="PlaneMesh" id=8]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 25, 12, 1 )
+
+[node name="Platform" type="Spatial"]
+
+[node name="Top" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0 )
+
+[node name="Wall" type="StaticBody" parent="Top"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Top/Wall"]
+transform = Transform( 10, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Top/Wall/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="Door" type="StaticBody" parent="Top"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionPolygon" parent="Top/Door"]
+transform = Transform( 1.00078, 0, 0, 0, 1.00078, 0, 0, 0, 1.00078, 0, 0, 0 )
+disabled = true
+polygon = PoolVector2Array( 10, 2.5, 10, -2.5, 6, -2.5, 6, 1.5, -6, 1.6, -6, -2.5, -10, -2.5, -10, 2.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Top/Door/Col"]
+transform = Transform( 9.99225, 0, 0, 0, 0.499612, 0, 0, 0, 0.499612, 0, 1.99845, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Top/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, 7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Top/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, -7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="Empty" type="StaticBody" parent="Top"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Top/Empty"]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Top/Empty/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="Left" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+
+[node name="Wall" type="StaticBody" parent="Left"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Left/Wall"]
+transform = Transform( 10, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Left/Wall/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="Door" type="StaticBody" parent="Left"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionPolygon" parent="Left/Door"]
+transform = Transform( 1.00078, 0, 0, 0, 1.00078, 0, 0, 0, 1.00078, 0, 0, 0 )
+disabled = true
+polygon = PoolVector2Array( 10, 2.5, 10, -2.5, 6, -2.5, 6, 1.5, -6, 1.6, -6, -2.5, -10, -2.5, -10, 2.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Left/Door/Col"]
+transform = Transform( 9.99225, 0, 0, 0, 0.499612, 0, 0, 0, 0.499612, 0, 1.99845, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Left/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, 7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Left/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, -7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="Empty" type="StaticBody" parent="Left"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Left/Empty"]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Left/Empty/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="Right" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+
+[node name="Wall" type="StaticBody" parent="Right"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Right/Wall"]
+transform = Transform( 10, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Right/Wall/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="Door" type="StaticBody" parent="Right"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionPolygon" parent="Right/Door"]
+transform = Transform( 1.00078, 0, 0, 0, 1.00078, 0, 0, 0, 1.00078, 0, 0, 0 )
+disabled = true
+polygon = PoolVector2Array( 10, 2.5, 10, -2.5, 6, -2.5, 6, 1.5, -6, 1.6, -6, -2.5, -10, -2.5, -10, 2.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Right/Door/Col"]
+transform = Transform( 9.99225, 0, 0, 0, 0.499612, 0, 0, 0, 0.499612, 0, 1.99845, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Right/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, 7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Right/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, -7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="Empty" type="StaticBody" parent="Right"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Right/Empty"]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Right/Empty/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="Bottom" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 0 )
+
+[node name="Wall" type="StaticBody" parent="Bottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Bottom/Wall"]
+transform = Transform( 10, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Bottom/Wall/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 5 )
+
+[node name="Door" type="StaticBody" parent="Bottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionPolygon" parent="Bottom/Door"]
+transform = Transform( 1.00078, 0, 0, 0, 1.00078, 0, 0, 0, 1.00078, 0, 0, 0 )
+disabled = true
+polygon = PoolVector2Array( 10, 2.5, 10, -2.5, 6, -2.5, 6, 1.5, -6, 1.6, -6, -2.5, -10, -2.5, -10, 2.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Bottom/Door/Col"]
+transform = Transform( 9.99225, 0, 0, 0, 0.499612, 0, 0, 0, 0.499612, 0, 1.99845, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Bottom/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, 7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Bottom/Door/Col"]
+transform = Transform( 1.99845, 0, 0, 0, 1.99845, 0, 0, 0, 0.499612, -7.9938, -0.499612, 0 )
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 7 )
+
+[node name="Empty" type="StaticBody" parent="Bottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
+
+[node name="Col" type="CollisionShape" parent="Bottom/Empty"]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="Bottom/Empty/Col"]
+mesh = SubResource( 3 )
+skin = SubResource( 4 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="Light" type="Spatial" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="Light"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57342, 0 )
+omni_range = 139.287
+omni_attenuation = 7.11851
+
+[node name="Floor" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+use_collision = true
+width = 20.0
+height = 1.0
+depth = 20.0
+material = SubResource( 1 )
+
+[node name="CSGMesh" type="CSGMesh" parent="."]
+transform = Transform( 10, 0, 0, 0, -1, 8.74228e-07, 0, -8.74228e-08, -10, 0, 5, 0 )
+mesh = SubResource( 8 )
+material = SubResource( 9 )
